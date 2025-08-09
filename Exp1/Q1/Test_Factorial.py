@@ -3,16 +3,18 @@ from Factorial import fact
 
 class Test_Factorial(unittest.TestCase):
 
-    def test_positive(self):
-        self.assertEqual(fact(5),120)
-
-    def test_negative(self):
-        self.assertEqual(fact(-5),None)
-        # with self.assertRaises(TypeError):
-        #     fact(-5)
-
-    def test_zero(self):
-        self.assertEqual(fact(0),1)
-
+    def test_factorial(self):
+        test_cases = [
+            (5, 120),
+            (0, 1),
+            (-5, None)
+        ]
+        
+        for i, (input_val, expected) in enumerate(test_cases):
+            with self.subTest(test=i+1):
+                result = fact(input_val)
+                status = 'passed' if result == expected else 'failed'
+                print(f"Test {i+1}: input={input_val}, output={result} ({status})")
+                self.assertEqual(result, expected)
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(verbosity=0)
